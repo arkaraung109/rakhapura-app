@@ -63,8 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web.ignoring()
             .antMatchers(HttpMethod.OPTIONS, "/**")
-            .antMatchers(HttpMethod.POST, "/api/v1/authenticate")
-            .antMatchers("/HOME/**");
+            .antMatchers(HttpMethod.POST, "/api/v1/authenticate");
     }
 	
 	@Override
