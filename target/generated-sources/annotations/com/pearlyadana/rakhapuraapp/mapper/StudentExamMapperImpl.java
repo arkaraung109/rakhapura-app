@@ -1,0 +1,538 @@
+package com.pearlyadana.rakhapuraapp.mapper;
+
+import com.pearlyadana.rakhapuraapp.entity.AcademicYear;
+import com.pearlyadana.rakhapuraapp.entity.Attendance;
+import com.pearlyadana.rakhapuraapp.entity.Class;
+import com.pearlyadana.rakhapuraapp.entity.Exam;
+import com.pearlyadana.rakhapuraapp.entity.ExamSubject;
+import com.pearlyadana.rakhapuraapp.entity.ExamTitle;
+import com.pearlyadana.rakhapuraapp.entity.Grade;
+import com.pearlyadana.rakhapuraapp.entity.Hostel;
+import com.pearlyadana.rakhapuraapp.entity.Region;
+import com.pearlyadana.rakhapuraapp.entity.Student;
+import com.pearlyadana.rakhapuraapp.entity.StudentClass;
+import com.pearlyadana.rakhapuraapp.entity.StudentExam;
+import com.pearlyadana.rakhapuraapp.entity.Subject;
+import com.pearlyadana.rakhapuraapp.entity.SubjectType;
+import com.pearlyadana.rakhapuraapp.model.request.AcademicYearDto;
+import com.pearlyadana.rakhapuraapp.model.request.AttendanceDto;
+import com.pearlyadana.rakhapuraapp.model.request.ClassDto;
+import com.pearlyadana.rakhapuraapp.model.request.ExamDto;
+import com.pearlyadana.rakhapuraapp.model.request.ExamSubjectDto;
+import com.pearlyadana.rakhapuraapp.model.request.ExamTitleDto;
+import com.pearlyadana.rakhapuraapp.model.request.GradeDto;
+import com.pearlyadana.rakhapuraapp.model.request.HostelDto;
+import com.pearlyadana.rakhapuraapp.model.request.RegionDto;
+import com.pearlyadana.rakhapuraapp.model.request.StudentClassDto;
+import com.pearlyadana.rakhapuraapp.model.request.StudentDto;
+import com.pearlyadana.rakhapuraapp.model.request.StudentExamDto;
+import com.pearlyadana.rakhapuraapp.model.request.SubjectDto;
+import com.pearlyadana.rakhapuraapp.model.request.SubjectTypeDto;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2023-09-17T21:37:41+0630",
+    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 17.0.8 (Oracle Corporation)"
+)
+@Component
+public class StudentExamMapperImpl implements StudentExamMapper {
+
+    @Override
+    public StudentExamDto mapEntityToDto(StudentExam entity) {
+        if ( entity == null ) {
+            return null;
+        }
+
+        StudentExamDto studentExamDto = new StudentExamDto();
+
+        studentExamDto.setId( entity.getId() );
+        studentExamDto.setMark( entity.getMark() );
+        studentExamDto.setPass( entity.isPass() );
+        studentExamDto.setExamSubject( examSubjectToExamSubjectDto( entity.getExamSubject() ) );
+        studentExamDto.setAttendance( attendanceToAttendanceDto( entity.getAttendance() ) );
+
+        return studentExamDto;
+    }
+
+    @Override
+    public StudentExam mapDtoToEntity(StudentExamDto dto) {
+        if ( dto == null ) {
+            return null;
+        }
+
+        StudentExam studentExam = new StudentExam();
+
+        studentExam.setId( dto.getId() );
+        studentExam.setMark( dto.getMark() );
+        studentExam.setPass( dto.isPass() );
+        studentExam.setExamSubject( examSubjectDtoToExamSubject( dto.getExamSubject() ) );
+        studentExam.setAttendance( attendanceDtoToAttendance( dto.getAttendance() ) );
+
+        return studentExam;
+    }
+
+    protected AcademicYearDto academicYearToAcademicYearDto(AcademicYear academicYear) {
+        if ( academicYear == null ) {
+            return null;
+        }
+
+        AcademicYearDto academicYearDto = new AcademicYearDto();
+
+        academicYearDto.setId( academicYear.getId() );
+        academicYearDto.setName( academicYear.getName() );
+        academicYearDto.setAuthorizedStatus( academicYear.isAuthorizedStatus() );
+        academicYearDto.setAuthorizedUserId( academicYear.getAuthorizedUserId() );
+
+        return academicYearDto;
+    }
+
+    protected ExamTitleDto examTitleToExamTitleDto(ExamTitle examTitle) {
+        if ( examTitle == null ) {
+            return null;
+        }
+
+        ExamTitleDto examTitleDto = new ExamTitleDto();
+
+        examTitleDto.setId( examTitle.getId() );
+        examTitleDto.setName( examTitle.getName() );
+        examTitleDto.setAuthorizedStatus( examTitle.isAuthorizedStatus() );
+        examTitleDto.setAuthorizedUserId( examTitle.getAuthorizedUserId() );
+
+        return examTitleDto;
+    }
+
+    protected GradeDto gradeToGradeDto(Grade grade) {
+        if ( grade == null ) {
+            return null;
+        }
+
+        GradeDto gradeDto = new GradeDto();
+
+        gradeDto.setId( grade.getId() );
+        gradeDto.setName( grade.getName() );
+        gradeDto.setRemark( grade.getRemark() );
+        gradeDto.setAbbreviate( grade.getAbbreviate() );
+        gradeDto.setAuthorizedStatus( grade.isAuthorizedStatus() );
+        gradeDto.setAuthorizedUserId( grade.getAuthorizedUserId() );
+
+        return gradeDto;
+    }
+
+    protected SubjectTypeDto subjectTypeToSubjectTypeDto(SubjectType subjectType) {
+        if ( subjectType == null ) {
+            return null;
+        }
+
+        SubjectTypeDto subjectTypeDto = new SubjectTypeDto();
+
+        subjectTypeDto.setId( subjectType.getId() );
+        subjectTypeDto.setName( subjectType.getName() );
+        subjectTypeDto.setAuthorizedStatus( subjectType.isAuthorizedStatus() );
+        subjectTypeDto.setAuthorizedUserId( subjectType.getAuthorizedUserId() );
+        subjectTypeDto.setGrade( gradeToGradeDto( subjectType.getGrade() ) );
+
+        return subjectTypeDto;
+    }
+
+    protected ExamDto examToExamDto(Exam exam) {
+        if ( exam == null ) {
+            return null;
+        }
+
+        ExamDto examDto = new ExamDto();
+
+        examDto.setId( exam.getId() );
+        examDto.setExamDate( exam.getExamDate() );
+        examDto.setTime( exam.getTime() );
+        examDto.setPassMark( exam.getPassMark() );
+        examDto.setMarkPercentage( exam.getMarkPercentage() );
+        examDto.setPublished( exam.isPublished() );
+        examDto.setAuthorizedStatus( exam.isAuthorizedStatus() );
+        examDto.setAuthorizedUserId( exam.getAuthorizedUserId() );
+        examDto.setAcademicYear( academicYearToAcademicYearDto( exam.getAcademicYear() ) );
+        examDto.setExamTitle( examTitleToExamTitleDto( exam.getExamTitle() ) );
+        examDto.setSubjectType( subjectTypeToSubjectTypeDto( exam.getSubjectType() ) );
+
+        return examDto;
+    }
+
+    protected SubjectDto subjectToSubjectDto(Subject subject) {
+        if ( subject == null ) {
+            return null;
+        }
+
+        Long id = null;
+        String name = null;
+        boolean authorizedStatus = false;
+        Long authorizedUserId = null;
+
+        id = subject.getId();
+        name = subject.getName();
+        authorizedStatus = subject.isAuthorizedStatus();
+        authorizedUserId = subject.getAuthorizedUserId();
+
+        SubjectDto subjectDto = new SubjectDto( id, name, authorizedStatus, authorizedUserId );
+
+        return subjectDto;
+    }
+
+    protected ExamSubjectDto examSubjectToExamSubjectDto(ExamSubject examSubject) {
+        if ( examSubject == null ) {
+            return null;
+        }
+
+        ExamSubjectDto examSubjectDto = new ExamSubjectDto();
+
+        examSubjectDto.setId( examSubject.getId() );
+        examSubjectDto.setPassMark( examSubject.getPassMark() );
+        examSubjectDto.setMarkPercentage( examSubject.getMarkPercentage() );
+        examSubjectDto.setAuthorizedStatus( examSubject.isAuthorizedStatus() );
+        examSubjectDto.setAuthorizedUserId( examSubject.getAuthorizedUserId() );
+        examSubjectDto.setExam( examToExamDto( examSubject.getExam() ) );
+        examSubjectDto.setSubject( subjectToSubjectDto( examSubject.getSubject() ) );
+
+        return examSubjectDto;
+    }
+
+    protected ClassDto classToClassDto(Class class1) {
+        if ( class1 == null ) {
+            return null;
+        }
+
+        ClassDto classDto = new ClassDto();
+
+        classDto.setId( class1.getId() );
+        classDto.setName( class1.getName() );
+        classDto.setAuthorizedStatus( class1.isAuthorizedStatus() );
+        classDto.setAuthorizedUserId( class1.getAuthorizedUserId() );
+        classDto.setAcademicYear( academicYearToAcademicYearDto( class1.getAcademicYear() ) );
+        classDto.setGrade( gradeToGradeDto( class1.getGrade() ) );
+
+        return classDto;
+    }
+
+    protected HostelDto hostelToHostelDto(Hostel hostel) {
+        if ( hostel == null ) {
+            return null;
+        }
+
+        HostelDto hostelDto = new HostelDto();
+
+        hostelDto.setId( hostel.getId() );
+        hostelDto.setName( hostel.getName() );
+        hostelDto.setAddress( hostel.getAddress() );
+        hostelDto.setPhone( hostel.getPhone() );
+        hostelDto.setAuthorizedStatus( hostel.isAuthorizedStatus() );
+        hostelDto.setAuthorizedUserId( hostel.getAuthorizedUserId() );
+
+        return hostelDto;
+    }
+
+    protected RegionDto regionToRegionDto(Region region) {
+        if ( region == null ) {
+            return null;
+        }
+
+        RegionDto regionDto = new RegionDto();
+
+        regionDto.setId( region.getId() );
+        regionDto.setName( region.getName() );
+        regionDto.setAuthorizedStatus( region.isAuthorizedStatus() );
+        regionDto.setAuthorizedUserId( region.getAuthorizedUserId() );
+
+        return regionDto;
+    }
+
+    protected StudentDto studentToStudentDto(Student student) {
+        if ( student == null ) {
+            return null;
+        }
+
+        StudentDto studentDto = new StudentDto();
+
+        studentDto.setId( student.getId() );
+        studentDto.setRegDate( student.getRegDate() );
+        studentDto.setName( student.getName() );
+        studentDto.setDob( student.getDob() );
+        studentDto.setSex( student.getSex() );
+        studentDto.setNationality( student.getNationality() );
+        studentDto.setNrc( student.getNrc() );
+        studentDto.setFatherName( student.getFatherName() );
+        studentDto.setMotherName( student.getMotherName() );
+        studentDto.setAddress( student.getAddress() );
+        studentDto.setMonasteryName( student.getMonasteryName() );
+        studentDto.setMonasteryHeadmaster( student.getMonasteryHeadmaster() );
+        studentDto.setMonasteryTownship( student.getMonasteryTownship() );
+        studentDto.setCreatedTimestamp( student.getCreatedTimestamp() );
+        studentDto.setRegion( regionToRegionDto( student.getRegion() ) );
+
+        return studentDto;
+    }
+
+    protected StudentClassDto studentClassToStudentClassDto(StudentClass studentClass) {
+        if ( studentClass == null ) {
+            return null;
+        }
+
+        StudentClassDto studentClassDto = new StudentClassDto();
+
+        studentClassDto.setId( studentClass.getId() );
+        studentClassDto.setRegNo( studentClass.getRegNo() );
+        studentClassDto.setRegSeqNo( studentClass.getRegSeqNo() );
+        studentClassDto.setArrival( studentClass.isArrival() );
+        studentClassDto.setCreatedTimestamp( studentClass.getCreatedTimestamp() );
+        studentClassDto.setExamTitle( examTitleToExamTitleDto( studentClass.getExamTitle() ) );
+        studentClassDto.setStudentClass( classToClassDto( studentClass.getStudentClass() ) );
+        studentClassDto.setHostel( hostelToHostelDto( studentClass.getHostel() ) );
+        studentClassDto.setStudent( studentToStudentDto( studentClass.getStudent() ) );
+
+        return studentClassDto;
+    }
+
+    protected AttendanceDto attendanceToAttendanceDto(Attendance attendance) {
+        if ( attendance == null ) {
+            return null;
+        }
+
+        AttendanceDto attendanceDto = new AttendanceDto();
+
+        attendanceDto.setId( attendance.getId() );
+        attendanceDto.setPresent( attendance.isPresent() );
+        attendanceDto.setCreatedTimestamp( attendance.getCreatedTimestamp() );
+        attendanceDto.setExam( examToExamDto( attendance.getExam() ) );
+        attendanceDto.setStudentClass( studentClassToStudentClassDto( attendance.getStudentClass() ) );
+
+        return attendanceDto;
+    }
+
+    protected AcademicYear academicYearDtoToAcademicYear(AcademicYearDto academicYearDto) {
+        if ( academicYearDto == null ) {
+            return null;
+        }
+
+        AcademicYear academicYear = new AcademicYear();
+
+        academicYear.setId( academicYearDto.getId() );
+        academicYear.setName( academicYearDto.getName() );
+        academicYear.setAuthorizedStatus( academicYearDto.isAuthorizedStatus() );
+        academicYear.setAuthorizedUserId( academicYearDto.getAuthorizedUserId() );
+
+        return academicYear;
+    }
+
+    protected ExamTitle examTitleDtoToExamTitle(ExamTitleDto examTitleDto) {
+        if ( examTitleDto == null ) {
+            return null;
+        }
+
+        ExamTitle examTitle = new ExamTitle();
+
+        examTitle.setId( examTitleDto.getId() );
+        examTitle.setName( examTitleDto.getName() );
+        examTitle.setAuthorizedStatus( examTitleDto.isAuthorizedStatus() );
+        examTitle.setAuthorizedUserId( examTitleDto.getAuthorizedUserId() );
+
+        return examTitle;
+    }
+
+    protected Grade gradeDtoToGrade(GradeDto gradeDto) {
+        if ( gradeDto == null ) {
+            return null;
+        }
+
+        Grade grade = new Grade();
+
+        grade.setId( gradeDto.getId() );
+        grade.setName( gradeDto.getName() );
+        grade.setRemark( gradeDto.getRemark() );
+        grade.setAbbreviate( gradeDto.getAbbreviate() );
+        grade.setAuthorizedStatus( gradeDto.isAuthorizedStatus() );
+        grade.setAuthorizedUserId( gradeDto.getAuthorizedUserId() );
+
+        return grade;
+    }
+
+    protected SubjectType subjectTypeDtoToSubjectType(SubjectTypeDto subjectTypeDto) {
+        if ( subjectTypeDto == null ) {
+            return null;
+        }
+
+        SubjectType subjectType = new SubjectType();
+
+        subjectType.setId( subjectTypeDto.getId() );
+        subjectType.setName( subjectTypeDto.getName() );
+        subjectType.setAuthorizedStatus( subjectTypeDto.isAuthorizedStatus() );
+        subjectType.setAuthorizedUserId( subjectTypeDto.getAuthorizedUserId() );
+        subjectType.setGrade( gradeDtoToGrade( subjectTypeDto.getGrade() ) );
+
+        return subjectType;
+    }
+
+    protected Exam examDtoToExam(ExamDto examDto) {
+        if ( examDto == null ) {
+            return null;
+        }
+
+        Exam exam = new Exam();
+
+        exam.setId( examDto.getId() );
+        exam.setExamDate( examDto.getExamDate() );
+        exam.setTime( examDto.getTime() );
+        exam.setPassMark( examDto.getPassMark() );
+        exam.setMarkPercentage( examDto.getMarkPercentage() );
+        exam.setPublished( examDto.isPublished() );
+        exam.setAuthorizedStatus( examDto.isAuthorizedStatus() );
+        exam.setAuthorizedUserId( examDto.getAuthorizedUserId() );
+        exam.setAcademicYear( academicYearDtoToAcademicYear( examDto.getAcademicYear() ) );
+        exam.setExamTitle( examTitleDtoToExamTitle( examDto.getExamTitle() ) );
+        exam.setSubjectType( subjectTypeDtoToSubjectType( examDto.getSubjectType() ) );
+
+        return exam;
+    }
+
+    protected Subject subjectDtoToSubject(SubjectDto subjectDto) {
+        if ( subjectDto == null ) {
+            return null;
+        }
+
+        Subject subject = new Subject();
+
+        subject.setId( subjectDto.getId() );
+        subject.setName( subjectDto.getName() );
+        subject.setAuthorizedStatus( subjectDto.isAuthorizedStatus() );
+        subject.setAuthorizedUserId( subjectDto.getAuthorizedUserId() );
+
+        return subject;
+    }
+
+    protected ExamSubject examSubjectDtoToExamSubject(ExamSubjectDto examSubjectDto) {
+        if ( examSubjectDto == null ) {
+            return null;
+        }
+
+        ExamSubject examSubject = new ExamSubject();
+
+        examSubject.setId( examSubjectDto.getId() );
+        examSubject.setPassMark( examSubjectDto.getPassMark() );
+        examSubject.setMarkPercentage( examSubjectDto.getMarkPercentage() );
+        examSubject.setAuthorizedStatus( examSubjectDto.isAuthorizedStatus() );
+        examSubject.setAuthorizedUserId( examSubjectDto.getAuthorizedUserId() );
+        examSubject.setExam( examDtoToExam( examSubjectDto.getExam() ) );
+        examSubject.setSubject( subjectDtoToSubject( examSubjectDto.getSubject() ) );
+
+        return examSubject;
+    }
+
+    protected Class classDtoToClass(ClassDto classDto) {
+        if ( classDto == null ) {
+            return null;
+        }
+
+        Class class1 = new Class();
+
+        class1.setId( classDto.getId() );
+        class1.setName( classDto.getName() );
+        class1.setAuthorizedStatus( classDto.isAuthorizedStatus() );
+        class1.setAuthorizedUserId( classDto.getAuthorizedUserId() );
+        class1.setAcademicYear( academicYearDtoToAcademicYear( classDto.getAcademicYear() ) );
+        class1.setGrade( gradeDtoToGrade( classDto.getGrade() ) );
+
+        return class1;
+    }
+
+    protected Hostel hostelDtoToHostel(HostelDto hostelDto) {
+        if ( hostelDto == null ) {
+            return null;
+        }
+
+        Hostel hostel = new Hostel();
+
+        hostel.setId( hostelDto.getId() );
+        hostel.setName( hostelDto.getName() );
+        hostel.setAddress( hostelDto.getAddress() );
+        hostel.setPhone( hostelDto.getPhone() );
+        hostel.setAuthorizedStatus( hostelDto.isAuthorizedStatus() );
+        hostel.setAuthorizedUserId( hostelDto.getAuthorizedUserId() );
+
+        return hostel;
+    }
+
+    protected Region regionDtoToRegion(RegionDto regionDto) {
+        if ( regionDto == null ) {
+            return null;
+        }
+
+        Region region = new Region();
+
+        region.setId( regionDto.getId() );
+        region.setName( regionDto.getName() );
+        region.setAuthorizedStatus( regionDto.isAuthorizedStatus() );
+        region.setAuthorizedUserId( regionDto.getAuthorizedUserId() );
+
+        return region;
+    }
+
+    protected Student studentDtoToStudent(StudentDto studentDto) {
+        if ( studentDto == null ) {
+            return null;
+        }
+
+        Student student = new Student();
+
+        student.setId( studentDto.getId() );
+        student.setRegDate( studentDto.getRegDate() );
+        student.setName( studentDto.getName() );
+        student.setDob( studentDto.getDob() );
+        student.setSex( studentDto.getSex() );
+        student.setNationality( studentDto.getNationality() );
+        student.setNrc( studentDto.getNrc() );
+        student.setFatherName( studentDto.getFatherName() );
+        student.setMotherName( studentDto.getMotherName() );
+        student.setAddress( studentDto.getAddress() );
+        student.setMonasteryName( studentDto.getMonasteryName() );
+        student.setMonasteryHeadmaster( studentDto.getMonasteryHeadmaster() );
+        student.setMonasteryTownship( studentDto.getMonasteryTownship() );
+        student.setCreatedTimestamp( studentDto.getCreatedTimestamp() );
+        student.setRegion( regionDtoToRegion( studentDto.getRegion() ) );
+
+        return student;
+    }
+
+    protected StudentClass studentClassDtoToStudentClass(StudentClassDto studentClassDto) {
+        if ( studentClassDto == null ) {
+            return null;
+        }
+
+        StudentClass studentClass = new StudentClass();
+
+        studentClass.setId( studentClassDto.getId() );
+        studentClass.setRegNo( studentClassDto.getRegNo() );
+        studentClass.setRegSeqNo( studentClassDto.getRegSeqNo() );
+        studentClass.setArrival( studentClassDto.isArrival() );
+        studentClass.setCreatedTimestamp( studentClassDto.getCreatedTimestamp() );
+        studentClass.setExamTitle( examTitleDtoToExamTitle( studentClassDto.getExamTitle() ) );
+        studentClass.setStudentClass( classDtoToClass( studentClassDto.getStudentClass() ) );
+        studentClass.setHostel( hostelDtoToHostel( studentClassDto.getHostel() ) );
+        studentClass.setStudent( studentDtoToStudent( studentClassDto.getStudent() ) );
+
+        return studentClass;
+    }
+
+    protected Attendance attendanceDtoToAttendance(AttendanceDto attendanceDto) {
+        if ( attendanceDto == null ) {
+            return null;
+        }
+
+        Attendance attendance = new Attendance();
+
+        attendance.setId( attendanceDto.getId() );
+        attendance.setPresent( attendanceDto.isPresent() );
+        attendance.setCreatedTimestamp( attendanceDto.getCreatedTimestamp() );
+        attendance.setExam( examDtoToExam( attendanceDto.getExam() ) );
+        attendance.setStudentClass( studentClassDtoToStudentClass( attendanceDto.getStudentClass() ) );
+
+        return attendance;
+    }
+}
