@@ -80,10 +80,10 @@ public class StudentServiceImpl implements StudentService {
         Pageable sortedByCreatedTimestamp;
         if(isAscending) {
             sortedByCreatedTimestamp = PageRequest.of(PaginationUtil.pageNumber(pageNumber),
-                    paginationUtil.getPageSize(), Sort.by("createdTimestamp").ascending());
+                    paginationUtil.getPageSize(), Sort.by("created_timestamp").ascending());
         } else {
             sortedByCreatedTimestamp = PageRequest.of(PaginationUtil.pageNumber(pageNumber),
-                    paginationUtil.getPageSize(), Sort.by("createdTimestamp").descending());
+                    paginationUtil.getPageSize(), Sort.by("created_timestamp").descending());
         }
         Page<Student> page = null;
         if(regionId == 0) {

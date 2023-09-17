@@ -16,7 +16,7 @@ import java.util.Optional;
 @Repository
 public interface ExamRepository extends JpaRepository<Exam, Long> {
 
-    String joinQuery = "select e.* from exam e where ((e.exam_date like :keyword%) or (e.time like :keyword%) or (e.pass_mark like :keyword%) or (e.mark_percentage like :keyword%))";
+    String joinQuery = "select e.* from exam e where ((e.exam_date like :keyword%) or (e.time like :keyword%) or (cast(e.pass_mark as text) like :keyword%) or (cast(e.mark_percentage as text) like :keyword%))";
 
     Optional<Exam> findFirstByAcademicYearIdAndExamTitleIdAndSubjectTypeId(Long academicYearId, Long examTitleId, Long subjectTypeId);
 

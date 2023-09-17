@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public interface ExamSubjectRepository extends JpaRepository<ExamSubject, Long> {
 
-    String joinQuery = "select es.* from exam_subject es, exam e where es.exam_id=e.id and ((es.pass_mark like :keyword%) or (es.mark_percentage like :keyword%))";
+    String joinQuery = "select es.* from exam_subject es, exam e where es.exam_id=e.id and ((cast(es.pass_mark as text) like :keyword%) or (cast(es.mark_percentage as text) like :keyword%))";
 
     List<ExamSubject> findAllByExamId(Long examId);
 

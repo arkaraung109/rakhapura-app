@@ -124,10 +124,10 @@ public class StudentClassServiceImpl implements StudentClassService {
         Pageable sortedByCreatedTimestamp;
         if(isAscending) {
             sortedByCreatedTimestamp = PageRequest.of(PaginationUtil.pageNumber(pageNumber),
-                    paginationUtil.getPageSize(), Sort.by("createdTimestamp").ascending());
+                    paginationUtil.getPageSize(), Sort.by("created_timestamp").ascending());
         } else {
             sortedByCreatedTimestamp = PageRequest.of(PaginationUtil.pageNumber(pageNumber),
-                    paginationUtil.getPageSize(), Sort.by("createdTimestamp").descending());
+                    paginationUtil.getPageSize(), Sort.by("created_timestamp").descending());
         }
         Page<StudentClass> page;
         if(examTitleId == 0 && academicYearId == 0 && gradeId == 0 && studentClass.equals("All")) {
