@@ -4,6 +4,7 @@ RUN mvn clean package -DskipTests
 
 FROM openjdk:17.0.1-jdk-slim
 COPY --from=build /target/rakhapuraapp-1.jar rakhapuraapp.jar
+ENV PORT=8080
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","rakhapuraapp.jar"]
 
